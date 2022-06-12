@@ -1,4 +1,4 @@
 package br.ufrn.imd.dao;
 
-public class NewsDao {
+public interface NewsDao {
 }
