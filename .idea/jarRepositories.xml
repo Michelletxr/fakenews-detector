@@ -12,6 +12,11 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="lii" />
+      <option name="name" value="Laboratório de Informática Industrial Repository" />
+      <option name="url" value="https://lii.imd.ufrn.br/nexus/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />

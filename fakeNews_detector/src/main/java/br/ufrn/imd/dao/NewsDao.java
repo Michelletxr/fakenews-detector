@@ -1,4 +1,18 @@
 package br.ufrn.imd.dao;
 
-public interface NewsDao {
+public class NewsDao extends DataBase {
+    @Override
+    public void saveNews() {
+
+    }
+
+    @Override
+    public void deleteNews() {
+
+    }
+
+    @Override
+    public void updateNews() {
+
+    }
 }
