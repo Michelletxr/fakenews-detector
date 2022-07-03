@@ -1,5 +1,7 @@
 package br.ufrn.imd.controller;
 
+import br.ufrn.imd.service.PreProcessing;
+import br.ufrn.imd.service.SimilarityAnalysis;
 /*
 *
 * classe responsável por manipular os dados
