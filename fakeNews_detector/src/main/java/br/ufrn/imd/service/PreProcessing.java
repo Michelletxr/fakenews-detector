@@ -1,4 +1,4 @@
-package br.ufrn.imd.model.service;
+package br.ufrn.imd.service;
 
 public interface PreProcessing {
 }

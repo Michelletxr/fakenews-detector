@@ -1,4 +1,4 @@
-package br.ufrn.imd.model.news;
+package br.ufrn.imd.model;
 import java.time.ZonedDateTime;
 
 

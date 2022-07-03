@@ -1,6 +1,4 @@
-package br.ufrn.imd.model.service;
-
-import br.ufrn.imd.model.service.PreProcessing;
+package br.ufrn.imd.service;
 
 public class PreProcessingImpl implements PreProcessing {
     private String message_processed;
