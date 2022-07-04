@@ -12,4 +12,14 @@ import br.ufrn.imd.service.SimilarityAnalysis;
 *
 * */
 public class ManipuleData implements PreProcessing, SimilarityAnalysis{
+
+    @Override
+    public double levDistance() {
+        return 0;
+    }
+
+    @Override
+    public double trigramAlgorithm() {
+        return 0;
+    }
 }
