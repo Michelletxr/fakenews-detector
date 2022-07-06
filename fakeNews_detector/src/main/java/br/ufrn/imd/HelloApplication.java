@@ -1,5 +1,7 @@
 package br.ufrn.imd;
 
+import br.ufrn.imd.controller.ImportDataCsv;
+import com.opencsv.exceptions.CsvException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,11 +12,18 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        ImportDataCsv load = new ImportDataCsv();
+        try {
+            load.readCSV();
+        }catch (CsvException e) {
+            throw new RuntimeException(e);
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
-        stage.show();
+       // stage.show();
     }
 
     public static void main(String[] args) {

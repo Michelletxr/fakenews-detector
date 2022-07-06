@@ -4,6 +4,13 @@ import br.ufrn.imd.service.PreProcessing;
 import br.ufrn.imd.service.SimilarityAnalysis;
 import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import br.ufrn.imd.dao.NewsDao;
+
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*
 *
 * classe responsável por manipular os dados
@@ -33,5 +40,25 @@ public class ManipuleData implements PreProcessing, SimilarityAnalysis{
         JaroWinklerSimilarity jaroWinklerSimilarity=new JaroWinklerSimilarity();
 
         return jaroWinklerSimilarity.apply(txt1,txt2);
+    }
+
+    private NewsDao dao;
+
+    @Override
+    public String cleanString(String originalText) {
+        System.out.println(originalText);
+        String[] strArr = originalText.split(" ");//Splitting using whitespace
+        ArrayList<String> listStrings = new ArrayList<String>(Arrays.asList(strArr));
+        listStrings.removeIf(str-> str.length()<=3);
+
+        String text1 = Normalizer.normalize( String.join(" ", listStrings), Normalizer.Form.NFD)
+                .replaceAll("[\\p{InCombiningDiacriticalMarks}!,?]", "")
+                .toLowerCase();
+
+
+        String text2 = text1.replaceAll("[\\\\p{.}]", " ");
+        System.out.println(text2);
+
+        return String.join(" ", listStrings);
     }
 }

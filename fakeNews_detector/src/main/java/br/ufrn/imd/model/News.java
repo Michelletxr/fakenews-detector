@@ -6,7 +6,7 @@ public class News {
 
     private int id;
     private String link;
-    private String text_original;
+    private String textOriginal;
     private String text_format;
     private ZonedDateTime timestamp;
     private TypeNews typeNews; // fake news or true news
@@ -29,11 +29,11 @@ public class News {
     }
 
     public String getText_original() {
-        return text_original;
+        return textOriginal;
     }
 
     public void setText_original(String text_original) {
-        this.text_original = text_original;
+        this.textOriginal = text_original;
     }
 
     public String getText_format() {

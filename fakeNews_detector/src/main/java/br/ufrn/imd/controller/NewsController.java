@@ -5,5 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class NewsController {
+
+
+    public void loadDataset(){
+
+    }
     News Noticia;
 }

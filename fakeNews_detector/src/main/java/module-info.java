@@ -2,6 +2,9 @@ module com.example.fakenews_detector {
     requires javafx.controls;
     requires javafx.fxml;
             
+                        requires org.kordamp.bootstrapfx.core;
+    requires com.opencsv;
+
     requires org.kordamp.bootstrapfx.core;
     requires org.apache.commons.text;
 
