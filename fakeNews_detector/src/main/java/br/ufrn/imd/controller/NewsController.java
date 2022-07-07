@@ -4,11 +4,12 @@ import br.ufrn.imd.model.News;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class NewsController {
+public class NewsController extends ManipuleData {
 
 
-    public void loadDataset(){
+    News Noticia;
+    @Override
+    public void saveData() {
 
     }
-    News Noticia;
 }

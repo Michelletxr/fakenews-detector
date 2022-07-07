@@ -1,23 +1,45 @@
 package br.ufrn.imd.dao;
 
-import br.ufrn.imd.model.news.News;
+import br.ufrn.imd.model.News;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class NewsDao extends DataBase {
-    private ArrayList<News> database;
-    @Override
-    public void saveNews() {
+public class NewsDao  {
+    //padrão singleton
+    private static NewsDao newsDao;
+   ;
+    private Map<Integer, News>  database;
 
+    public static NewsDao getInstance(){
+        if(newsDao == null){
+            newsDao = new NewsDao();
+        }
+        return newsDao;
     }
 
-    @Override
-    public void deleteNews() {
-
+    private NewsDao(){
+        database = new HashMap<>();
     }
 
-    @Override
-    public void updateNews() {
+    public void saveNews(News news) {
+        database.put(news.getId(),news);
+    }
 
+    public void listNews() {
+        database.values().forEach( news -> System.out.println(news));
+    }
+
+
+
+
+    public void deleteNews(Integer id) {
+        database.remove(id);
+    }
+
+
+    public void updateNews( Integer id, News news) {
+            database.replace(id, news);
     }
 }

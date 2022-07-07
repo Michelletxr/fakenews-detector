@@ -1,7 +1,8 @@
 package br.ufrn.imd.controller;
 
-import br.ufrn.imd.service.PreProcessing;
-import br.ufrn.imd.service.SimilarityAnalysis;
+import br.ufrn.imd.controller.interfaces.PreProcessing;
+import br.ufrn.imd.controller.interfaces.SimilarityAnalysis;
+import br.ufrn.imd.model.News;
 import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 import br.ufrn.imd.dao.NewsDao;
@@ -10,6 +11,8 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 /*
 *
@@ -20,7 +23,7 @@ import java.util.List;
 *
 *
 * */
-public class ManipuleData implements PreProcessing, SimilarityAnalysis{
+public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing {
 
     @Override
     public double levDistance(String txt1, String txt2) {
@@ -46,19 +49,28 @@ public class ManipuleData implements PreProcessing, SimilarityAnalysis{
 
     @Override
     public String cleanString(String originalText) {
-        System.out.println(originalText);
-        String[] strArr = originalText.split(" ");//Splitting using whitespace
+        System.out.println("TEXTO ORIGINAL:" + originalText);
+        String text = originalText.replaceAll("[.,]","  ");
+        String[] strArr =text.toLowerCase().replaceAll("[\\p{InCombiningDiacriticalMarks}!?*()]", "").split("\\s");//Splitting using whitespace
         ArrayList<String> listStrings = new ArrayList<String>(Arrays.asList(strArr));
         listStrings.removeIf(str-> str.length()<=3);
+        String text1 = Normalizer.normalize( String.join(" ", listStrings), Normalizer.Form.NFD);
 
-        String text1 = Normalizer.normalize( String.join(" ", listStrings), Normalizer.Form.NFD)
-                .replaceAll("[\\p{InCombiningDiacriticalMarks}!,?]", "")
-                .toLowerCase();
-
-
-        String text2 = text1.replaceAll("[\\\\p{.}]", " ");
-        System.out.println(text2);
+        System.out.println("TEXTO MODIFICADO: " +  text1);
 
         return String.join(" ", listStrings);
     }
+
+       protected News buildDataToNews(List<String> data){
+            News fakenews = new News();
+            fakenews.setId(parseInt(data.get(0)));
+            fakenews.setText_original(data.get(1));
+            fakenews.setLink(data.get(2));
+            String[] data1 = fakenews.getText_original().split(" ");
+            fakenews.setText_format(cleanString(fakenews.getText_original()));
+            return fakenews;
+
+        }
+
+        public abstract void saveData();
 }
