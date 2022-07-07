@@ -1,4 +1,6 @@
 package br.ufrn.imd.controller;
+import br.ufrn.imd.dao.NewsDao;
+import br.ufrn.imd.model.News;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
@@ -17,22 +19,25 @@ public class ImportDataCsv extends ManipuleData {
 
     private List<String[]> lines = new ArrayList<>();
 
+
     static final String PATH_FILE = "/home/michelle/semestre/projeto_final/fakeNews_detector/src/main/resources/dataset/boatos.csv";
 
-    public void readCSV() throws IOException, CsvException {
+    public void loadCSVData() throws IOException, CsvException {
 
         Reader reader = Files.newBufferedReader(Paths.get(PATH_FILE));
         CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
 
         List<String[]> news= csvReader.readAll();
         for (String[] fakenews : news){
-            this.buildDataToNews(List.of(fakenews)).getText_original();
+            saveData(this.buildDataToNews(List.of(fakenews)));
         }
 
     }
     @Override
-    public void saveData(){
-        //chama dao
+    //salva no "banco de dados"
+    public void saveData(News news){
+        System.out.println("salvando no banco: " +news.getId());
+        //this.dao.saveNewsDataBase(news);
     }
 
 

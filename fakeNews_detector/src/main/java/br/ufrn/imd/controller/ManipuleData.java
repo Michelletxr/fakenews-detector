@@ -10,7 +10,10 @@ import br.ufrn.imd.dao.NewsDao;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
@@ -25,6 +28,7 @@ import static java.lang.Integer.parseInt;
 * */
 public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing {
 
+    protected NewsDao dao;
     @Override
     public double levDistance(String txt1, String txt2) {
         int greaterStr=Integer.max(txt1.length(),txt2.length());
@@ -45,20 +49,37 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         return jaroWinklerSimilarity.apply(txt1,txt2);
     }
 
-    private NewsDao dao;
-
     @Override
     public String cleanString(String originalText) {
-        System.out.println("TEXTO ORIGINAL:" + originalText);
-        String text = originalText.replaceAll("[.,]","  ");
-        String[] strArr =text.toLowerCase().replaceAll("[\\p{InCombiningDiacriticalMarks}!?*()]", "").split("\\s");//Splitting using whitespace
-        ArrayList<String> listStrings = new ArrayList<String>(Arrays.asList(strArr));
-        listStrings.removeIf(str-> str.length()<=3);
-        String text1 = Normalizer.normalize( String.join(" ", listStrings), Normalizer.Form.NFD);
 
-        System.out.println("TEXTO MODIFICADO: " +  text1);
+       //System.out.println("TEXTO ORIGINAL:" + originalText);
 
-        return String.join(" ", listStrings);
+       //normalizando textooriginal para manter um padrão unicode
+       String text = Normalizer.normalize(originalText, Normalizer.Form.NFD);
+
+        //retirando caracteres
+        String text_1 = (text.replaceAll("[.,!?*()+:-]"," ")).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+
+        //colocando em minusculo
+        String text_2 = text_1.toLowerCase();
+
+        //transformando string em array para facilitar as operações
+        String[] strArr= text_2.toLowerCase().split(" ");
+        List<String> listStrings = new ArrayList<String>(Arrays.asList(strArr));
+
+        //removendo palavras com tamanho menor ou igual a 3
+       listStrings.removeIf(str-> str.length()<=3);
+
+        //removendo palavras repetidas
+       List<String> finalList = listStrings.stream().distinct().collect(Collectors.toList());
+
+       //ordenando palavras
+        Collections.sort(finalList);
+
+
+       //System.out.println("TEXTO MODIFICADO: " + String.join(" ", finalList));
+
+        return String.join(" ", finalList);
     }
 
        protected News buildDataToNews(List<String> data){
@@ -69,8 +90,10 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
             String[] data1 = fakenews.getText_original().split(" ");
             fakenews.setText_format(cleanString(fakenews.getText_original()));
             return fakenews;
-
         }
 
-        public abstract void saveData();
+        //metodo abstrato
+        // importDataCsv salva os dados no "banco de dados"
+        //controler salva o dado enviado pelo usuário
+        public abstract void saveData(News news);
 }
