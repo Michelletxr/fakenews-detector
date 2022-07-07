@@ -34,7 +34,7 @@ public class NewsDao  {
     }
 
     public void listNews() {
-        database.values().forEach( news -> System.out.println(news));
+        database.values().forEach( news -> System.out.println(news.getText_format()));
     }
 
     public List<News> findAllNews(){

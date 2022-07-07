@@ -36,8 +36,8 @@ public class ImportDataCsv extends ManipuleData {
     @Override
     //salva no "banco de dados"
     public void saveData(News news){
-        System.out.println("salvando no banco: " +news.getId());
-        //this.dao.saveNewsDataBase(news);
+        this.dao = NewsDao.getInstance();
+        this.dao.saveNewsDataBase(news);
     }
 
 
