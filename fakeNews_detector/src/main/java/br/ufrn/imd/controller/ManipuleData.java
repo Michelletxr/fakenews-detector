@@ -8,6 +8,9 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 import br.ufrn.imd.dao.NewsDao;
 
 import java.text.Normalizer;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -89,7 +92,21 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
             fakenews.setLink(data.get(2));
             String[] data1 = fakenews.getText_original().split(" ");
             fakenews.setText_format(cleanString(fakenews.getText_original()));
+
+           convertTimestamp("2018-07-22 10:35");
             return fakenews;
+        }
+
+        private LocalDateTime convertTimestamp(String timestamp) {
+
+        LocalDateTime timestampConvert = null;
+
+        try{
+                timestampConvert = LocalDateTime.parse("2018-07-22 10:35", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            }catch (Exception e){
+               System.out.println("ocorreu um erro ao gerar o timestamp: " + e);
+            }
+            return timestampConvert;
         }
 
         //metodo abstrato

@@ -1,5 +1,5 @@
 package br.ufrn.imd.model;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 
 public class News {
@@ -8,7 +8,7 @@ public class News {
     private String link;
     private String textOriginal;
     private String text_format;
-    private ZonedDateTime timestamp;
+    private LocalDateTime timestamp;
     private TypeNews typeNews; // fake news or true news
 
 
@@ -44,11 +44,11 @@ public class News {
         this.text_format = text_format;
     }
 
-    public ZonedDateTime getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(ZonedDateTime timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
