@@ -14,4 +14,5 @@ public class NewsController extends ManipuleData {
         this.dao.saveNewsUser(news);
         //salvar o texto enviado pelo usuario
     }
+
 }

@@ -11,6 +11,8 @@ public class News {
     private LocalDateTime timestamp;
     private TypeNews typeNews; // fake news or true news
 
+    private double percentage;
+
 
     public int getId() {
         return id;
@@ -60,4 +62,11 @@ public class News {
         this.typeNews = typeNews;
     }
 
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
 }

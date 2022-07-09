@@ -33,6 +33,10 @@ public class NewsDao  {
        dataUser = news;
     }
 
+    public News getDataUser(){
+        return dataUser;
+    }
+
     public void listNews() {
         database.values().forEach( news -> System.out.println(news.getText_format()));
     }

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
 /*
@@ -107,6 +108,28 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
                System.out.println("ocorreu um erro ao gerar o timestamp: " + e);
             }
             return timestampConvert;
+    }
+
+        @Override
+        public double testSimilarity(String text) {
+
+            List<News>  fakenews = this.dao.findAllNews();
+            News dataUserAnalise = this.dao.getDataUser();
+            double levdistance = 0;
+            double jaroWinklerSimilarity = 0;
+            double levdistanceMedian = 0;
+            double jaroWinklerSimilarityMedian = 0;
+
+            for (News news: fakenews)
+            {
+                levdistance += levDistance(news.getText_format(), dataUserAnalise.getText_format());
+                jaroWinklerSimilarity += jaroWinklerSimilarity(news.getText_format(), dataUserAnalise.getText_format());
+            }
+
+            levdistanceMedian = levdistance/fakenews.size();
+            jaroWinklerSimilarityMedian = jaroWinklerSimilarity/fakenews.size();
+
+            return  Double.max(levdistanceMedian, jaroWinklerSimilarityMedian);
         }
 
         //metodo abstrato
