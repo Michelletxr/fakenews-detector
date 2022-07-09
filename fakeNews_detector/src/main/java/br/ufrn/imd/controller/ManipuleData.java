@@ -85,15 +85,15 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         return String.join(" ", finalList);
     }
 
-       protected News buildDataToNews(List<String> data){
+       @Override
+       public News buildDataToNews(List<String> data){
             News fakenews = new News();
             fakenews.setId(parseInt(data.get(0)));
             fakenews.setText_original(data.get(1));
             fakenews.setLink(data.get(2));
             String[] data1 = fakenews.getText_original().split(" ");
             fakenews.setText_format(cleanString(fakenews.getText_original()));
-
-           convertTimestamp("2018-07-22 10:35");
+            fakenews.setTimestamp(convertTimestamp(data.get(3)));
             return fakenews;
         }
 
@@ -102,7 +102,7 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         LocalDateTime timestampConvert = null;
 
         try{
-                timestampConvert = LocalDateTime.parse("2018-07-22 10:35", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                timestampConvert = LocalDateTime.parse(timestamp, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             }catch (Exception e){
                System.out.println("ocorreu um erro ao gerar o timestamp: " + e);
             }

@@ -25,7 +25,7 @@ public class NewsDao  {
     public void saveNewsDataBase(News news) {
 
 
-        System.out.println("salvando no banco: " +news.getId());
+        System.out.println("salvando no banco: " + news.getId());
         database.put(news.getId(),news);
     }
 
