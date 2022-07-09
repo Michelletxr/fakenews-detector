@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #CCFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="118.0" layoutY="77.0" prefHeight="45.0" prefWidth="362.0" text="DETECTOR DE FAKE NEWS" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField id="txt_texto" layoutX="35.0" layoutY="175.0" prefHeight="25.0" prefWidth="238.0" promptText="texto da pulblicação" />
+      <Label layoutX="35.0" layoutY="150.0" text="Insera um texto" />
+      <Label layoutX="38.0" layoutY="225.0" text="Insera um Link" />
+      <TextField id="txt_link" layoutX="35.0" layoutY="253.0" prefHeight="25.0" prefWidth="238.0" promptText="link da pulblicação" />
+      <DatePicker id="txt_data" layoutX="347.0" layoutY="175.0" promptText="data da publicação" />
+      <Label layoutX="347.0" layoutY="150.0" text="Insira uma data" />
+      <Button id="bnt_submit" layoutX="467.0" layoutY="253.0" mnemonicParsing="false" style="-fx-background-color: #20b2aa;" text="Submit" />
+   </children>
+</Pane>

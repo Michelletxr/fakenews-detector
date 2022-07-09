@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #CCFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="label_txt" layoutX="38.0" layoutY="42.0" prefHeight="92.0" prefWidth="513.0" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label id="label_pct" layoutX="237.0" layoutY="192.0" prefHeight="35.0" prefWidth="123.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="355.0" text="0% a 40%" textFill="#0eae31" />
+      <Label layoutX="38.0" layoutY="378.0" text="Baixa chance de ser fake news">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="269.0" layoutY="355.0" text="40% a 70%" textFill="#a7b209" />
+      <Label layoutX="225.0" layoutY="378.0" text="Média chance de ser fake news">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="435.0" layoutY="378.0" text="Alta chance de ser fake news">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label layoutX="475.0" layoutY="355.0" text="70% a 100%" textFill="#f21111" />
+   </children>
+</Pane>
