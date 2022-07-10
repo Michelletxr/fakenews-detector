@@ -23,16 +23,18 @@ import static java.lang.Integer.parseInt;
 
 /*
 *
-* classe responsável por manipular os dados
+* classe abstrata responsável por manipular os dados
 *
 * pre-processar os dados (tratamento)
 * executar os algoritmos de comparação (análise)
-*
+* implementa as interfaces SimilarityAnalysis e PreProcessing
 *
 * */
 public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing {
 
     protected NewsDao dao;
+
+    //implementação do algoritmo Distância Levenshtein
     @Override
     public double levDistance(String txt1, String txt2) {
         int greaterStr=Integer.max(txt1.length(),txt2.length());
@@ -45,6 +47,7 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         return normalizedIndex;
     }
 
+    //implementação do algoritmo Jaro-Winkler
     @Override
     public double jaroWinklerSimilarity(String txt1, String txt2) {
 
@@ -53,6 +56,7 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         return jaroWinklerSimilarity.apply(txt1,txt2);
     }
 
+    //método para preprocessamento da string
     @Override
     public String cleanString(String originalText) {
 
@@ -86,6 +90,8 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
         return String.join(" ", finalList);
     }
 
+
+        //método para transformar um dado no tipo News
        @Override
        public News buildDataToNews(List<String> data){
             News fakenews = new News();
@@ -98,6 +104,7 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
             return fakenews;
         }
 
+        //método para converter timestam no formato de data e tratar a exceção
         private LocalDateTime convertTimestamp(String timestamp) {
 
         LocalDateTime timestampConvert = null;
@@ -110,6 +117,8 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
             return timestampConvert;
     }
 
+
+        //método para testar a similariedade das string com o dataset
         @Override
         public double testSimilarity(String text) {
 
@@ -122,18 +131,24 @@ public abstract class ManipuleData implements SimilarityAnalysis, PreProcessing 
 
             for (News news: fakenews)
             {
+                //roda o algoritmo para todas as mensagens do dataset
                 levdistance += levDistance(news.getText_format(), dataUserAnalise.getText_format());
+
+                //roda o algoritmo para todas as mensagens do dataset
                 jaroWinklerSimilarity += jaroWinklerSimilarity(news.getText_format(), dataUserAnalise.getText_format());
             }
 
+            //faz a media pros valores adquiridos nos testes
             levdistanceMedian = levdistance/fakenews.size();
+
+            //faz a media pros valores adquiridos nos testes
             jaroWinklerSimilarityMedian = jaroWinklerSimilarity/fakenews.size();
 
+
+            //retorna o melhor resultado entre os dois
             return  Double.max(levdistanceMedian, jaroWinklerSimilarityMedian);
         }
 
-        //metodo abstrato
-        // importDataCsv salva os dados no "banco de dados"
-        //controler salva o dado enviado pelo usuário
+        //metodo abstrato que deve ser implementado pelas classes filhas de ManipuleData
         public abstract void saveData(News news);
 }

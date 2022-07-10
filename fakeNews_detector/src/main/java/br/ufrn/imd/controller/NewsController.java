@@ -12,7 +12,6 @@ public class NewsController extends ManipuleData {
     //salva na variavel dataUser, que representa o dado enviado pelo usuario
     public void saveData(News news) {
         this.dao.saveNewsUser(news);
-        //salvar o texto enviado pelo usuario
     }
 
 }

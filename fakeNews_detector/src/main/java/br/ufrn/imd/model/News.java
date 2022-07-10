@@ -1,7 +1,11 @@
 package br.ufrn.imd.model;
 import java.time.LocalDateTime;
 
-
+/*
+* esta classe define o modelo do objeto news
+* possui todos os atributos para o objeto news
+* possui tods os getters e setters para manipulação do atributos
+* */
 public class News {
 
     private int id;
