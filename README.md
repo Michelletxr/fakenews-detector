@@ -1,1 +1,1 @@
-# projeto ministrado durante a disciplina de linguagem de programação II
+# projeto referente a disciplina de linguagem de programação II
